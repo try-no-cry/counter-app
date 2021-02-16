@@ -2,30 +2,34 @@ import React, { Component } from 'react';
 
 class  Counter extends Component {
     state = {
-        count:0,
-        tags:["t1","t2","t3"]
+        
+       
       }
+
+   
+
     render() { 
         return ( 
-            <React.Fragment>
-                <span className={this.getbadgeClasses()}>{this.formatCount()}</span>
-                <button className="btn btn-secondary btn-sm">Increment</button>
-                <ul>
-                    {this.state.tags.map(tag=><li key={tag}>{tag}</li>)}
-                </ul>
-            </React.Fragment>
+            <div>
+                
+                <span className={this.getbadgeClasses()}>{this.formatvalue()}</span>
+                <button onClick={()=>this.props.onIncrement(this.props.counter.id)} className="btn btn-secondary btn-sm">+</button>
+                <button onClick={()=>this.props.onDecrement(this.props.counter.id)} className="m-1 btn btn-outline-secondary btn-sm"style={{backgroundColor:"red",color:"white"}}>-</button>
+                <button onClick={()=>this.props.onDelete(this.props.counter.id)} className="btn btn-danger btn-sm m-2">Delete</button>
+                 
+            </div>
          );
     }
 
     getbadgeClasses(){
-        let classes="m-2 p-2 badge badge-";
-        return    classes +=this.state.count===0?"warning":"primary";
+        let classes="m-1 p-2 badge badge-";
+        return    classes +=this.props.counter.value===0?"warning":"primary";
 
         }
 
-    formatCount() {
-        const { count }=this.state;
-        return count===0?"zero":count;
+    formatvalue() {
+        const { value }=this.props.counter;
+        return value<=0?"zero":value;
     }
 }
  
